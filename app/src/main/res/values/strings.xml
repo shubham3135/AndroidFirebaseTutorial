@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FirebaseTut</string>
+    //This is for google sign in ('clientId' from google-services.json)
+    <string name="web_client_id">1092863931708-ha07evif8ugm4ipvdn8r5qttcscfq3d7.apps.googleusercontent.com</string>
 </resources>
