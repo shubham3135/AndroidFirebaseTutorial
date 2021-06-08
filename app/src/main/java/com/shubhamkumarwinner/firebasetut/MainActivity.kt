@@ -17,10 +17,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         auth = FirebaseAuth.getInstance()
+
+        //for example
+        auth.signOut()
+
+        //for registration
         btnRegister.setOnClickListener {
             registerUser()
         }
+
+        //for login
+        btnLogin.setOnClickListener {
+            loginUser()
+        }
     }
+
+    override fun onStart() {
+        super.onStart()
+        checkLoggedInState()
+    }
+
     private fun registerUser(){
         val email  = etEmailRegister.text.toString()
         val password  = etPasswordRegister.text.toString()
@@ -42,6 +58,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun loginUser(){
+        val email  = etEmailLogin.text.toString()
+        val password  = etPasswordLogin.text.toString()
+
+        if (email.isNotEmpty() && password.isNotEmpty()){
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    auth.signInWithEmailAndPassword(email, password).await()
+                    withContext(Dispatchers.Main){
+                        checkLoggedInState()
+                    }
+                }
+                catch (e: Exception){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
 
     private fun checkLoggedInState() {
         if (auth.currentUser == null){
