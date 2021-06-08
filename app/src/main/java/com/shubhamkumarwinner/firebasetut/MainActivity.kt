@@ -1,9 +1,11 @@
 package com.shubhamkumarwinner.firebasetut
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         //for example
-        auth.signOut()
+//        auth.signOut()
 
         //for registration
         btnRegister.setOnClickListener {
@@ -29,6 +31,37 @@ class MainActivity : AppCompatActivity() {
         //for login
         btnLogin.setOnClickListener {
             loginUser()
+        }
+
+        //for updating profile image and user name
+        btnUpdateProfile.setOnClickListener {
+            updateProfile()
+        }
+    }
+
+    //for adding profile pic and username
+    private fun updateProfile(){
+        auth.currentUser?.let {user ->
+            val userName = etUsername.text.toString()
+            val photoURI = Uri.parse("android.resource://$packageName/${R.drawable.pic}")
+            val profileUpdates = UserProfileChangeRequest.Builder()
+                .setDisplayName(userName)
+                .setPhotoUri(photoURI)
+                .build()
+
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    user.updateProfile(profileUpdates).await()
+                    withContext(Dispatchers.Main){
+                        checkLoggedInState()
+                        Toast.makeText(this@MainActivity, "Successfully updated user profile", Toast.LENGTH_LONG).show()
+                    }
+                }catch (e: Exception){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
     }
 
@@ -80,10 +113,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkLoggedInState() {
-        if (auth.currentUser == null){
+        val user = auth.currentUser
+        if (user == null){
             tvLoggedIn.text = "You are not logged in"
         }else{
             tvLoggedIn.text = "You are logged in"
+            etUsername.setText(user.displayName)
+            ivProfilePicture.setImageURI(user.photoUrl)
         }
     }
 }
