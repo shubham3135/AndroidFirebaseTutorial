@@ -6,14 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnGoogleSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="180dp"
+        android:layout_height="320dp"
+        android:background="#B1B1B1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        app:layout_constraintEnd_toEndOf="@+id/ivImage"
+        app:layout_constraintStart_toStartOf="@+id/ivImage"
+        app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+
+    <Button
+        android:id="@+id/btnDownloadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Download Image"
+        app:layout_constraintEnd_toEndOf="@+id/btnUploadImage"
+        app:layout_constraintStart_toStartOf="@+id/btnUploadImage"
+        app:layout_constraintTop_toBottomOf="@+id/btnUploadImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
