@@ -55,7 +55,28 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/etAge"
         app:layout_constraintTop_toBottomOf="@+id/etAge" />
-
+    <Button
+        android:id="@+id/btnRetrieveData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Retrieve data"
+        app:layout_constraintEnd_toEndOf="@+id/btnUploadData"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/btnUploadData"
+        app:layout_constraintTop_toBottomOf="@+id/btnUploadData" />
+    <TextView
+        android:id="@+id/tvRetrieveData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Person Data"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/btnRetrieveData"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/btnRetrieveData"
+        app:layout_constraintTop_toBottomOf="@+id/btnRetrieveData" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
