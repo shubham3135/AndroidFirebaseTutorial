@@ -25,11 +25,30 @@ class MainActivity : AppCompatActivity() {
             val age = etAge.text.toString().toInt()
             val person = Person(firstName, lastName, age)
             savePerson(person)
+//            subscribeToRealtimeUpdates()
         }
 
+        subscribeToRealtimeUpdates()
 
-        btnRetrieveData.setOnClickListener {
+        /*btnRetrieveData.setOnClickListener {
             retrievePerson()
+        }*/
+    }
+
+    private fun subscribeToRealtimeUpdates(){
+        personCollectionRef.addSnapshotListener { querySnapshot, error ->
+            error?.let {
+                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                return@addSnapshotListener
+            }
+            querySnapshot?.let {
+                val sb = StringBuilder()
+                for (document in it){
+                    val person = document.toObject<Person>()
+                    sb.append("$person\n")
+                }
+                tvRetrieveData.text = sb.toString()
+            }
         }
     }
 
