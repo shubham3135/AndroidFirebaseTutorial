@@ -91,13 +91,23 @@
 
     <Button
         android:id="@+id/btnRetrieveData"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Retrieve Data"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDeleteData"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnUploadData" />
+
+    <Button
+        android:id="@+id/btnDeleteData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Delete Data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnRetrieveData"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdatePerson" />
 
     <ScrollView
         android:layout_width="match_parent"
