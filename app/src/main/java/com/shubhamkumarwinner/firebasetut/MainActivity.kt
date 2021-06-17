@@ -43,6 +43,10 @@ class MainActivity : AppCompatActivity() {
             val newPerson = getNewPersonMap()
             updatePerson(oldPerson, newPerson)
         }
+
+        btnBatchWrite.setOnClickListener {
+            changeName("G5NopDplm9j8arSZLDHu", "Elon", "Musk")
+        }
     }
 
     private fun getOldPerson(): Person{
@@ -70,7 +74,23 @@ class MainActivity : AppCompatActivity() {
         return map
     }
 
-    private fun deletePerson(person: Person) = CoroutineScope(Dispatchers.IO).launch {
+    private fun changeName(personId: String, newFirstName: String, newLastName: String) =
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                Firebase.firestore.runBatch{ batch ->
+                    val personRef = personCollectionRef.document(personId)
+                    batch.update(personRef, "firstName", newFirstName)
+                    batch.update(personRef, "lastName", newLastName)
+                }.await()
+            }catch (e: Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+    private fun deletePerson(person: Person) =
+        CoroutineScope(Dispatchers.IO).launch {
         val personQuery = personCollectionRef.whereEqualTo("firstName", person.firstName)
             .whereEqualTo("lastName", person.lastName)
             .whereEqualTo("age", person.age)
@@ -98,7 +118,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updatePerson(person: Person, newPersonMap: Map<String, Any>) = CoroutineScope(Dispatchers.IO).launch {
+    private fun updatePerson(person: Person, newPersonMap: Map<String, Any>) =
+        CoroutineScope(Dispatchers.IO).launch {
         val personQuery = personCollectionRef.whereEqualTo("firstName", person.firstName)
             .whereEqualTo("lastName", person.lastName)
             .whereEqualTo("age", person.age)
@@ -120,7 +141,8 @@ class MainActivity : AppCompatActivity() {
             }
         }else{
             withContext(Dispatchers.Main){
-                Toast.makeText(this@MainActivity, "No person matched the query", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, "No person matched the query",
+                    Toast.LENGTH_LONG).show()
             }
         }
     }
