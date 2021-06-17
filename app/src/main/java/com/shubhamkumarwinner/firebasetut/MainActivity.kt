@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
             val age = etAge.text.toString().toInt()
             val person = Person(firstName, lastName, age)
             savePerson(person)
-//            subscribeToRealtimeUpdates()
         }
 
         subscribeToRealtimeUpdates()
