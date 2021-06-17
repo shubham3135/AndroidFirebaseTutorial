@@ -61,28 +61,45 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/etAge"
                 app:layout_constraintTop_toBottomOf="@+id/etAge" />
+
             <Button
                 android:id="@+id/btnRetrieveData"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="Retrieve data"
                 app:layout_constraintEnd_toEndOf="@+id/btnUploadData"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/btnUploadData"
                 app:layout_constraintTop_toBottomOf="@+id/btnUploadData" />
+
+            <EditText
+                android:id="@+id/editTextStartAge"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                app:layout_constraintStart_toStartOf="@+id/btnRetrieveData"
+                app:layout_constraintTop_toBottomOf="@+id/btnRetrieveData" />
+            <EditText
+                android:id="@+id/editTextEndAge"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="@+id/btnRetrieveData"
+                app:layout_constraintTop_toBottomOf="@+id/btnRetrieveData" />
+
             <TextView
                 android:id="@+id/tvRetrieveData"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="Person Data"
                 android:textAlignment="center"
+                android:layout_marginTop="5dp"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/btnRetrieveData"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/btnRetrieveData"
-                app:layout_constraintTop_toBottomOf="@+id/btnRetrieveData" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextStartAge" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
